@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="kk"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>New Era AI</title>
+<meta name="theme-color" content="#0b0a14"><link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f5fb;--card:#fff;--ink:#17152b;--mut:#6d6a8c;--bub:#fff;--line:#e2e0f0;--a:#0099d6;--b:#d41cb0;--ub:linear-gradient(135deg,#0099d6,#7a3cff);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0a14;--card:#16142a;--ink:#f2f1ff;--mut:#9a97b8;--bub:#1c1a33;--line:#2a2748;--a:#00d4ff;--b:#ff2bd6;--ub:linear-gradient(135deg,#0a84c6,#7a3cff)}}
+:root[data-theme="dark"]{--bg:#0b0a14;--card:#16142a;--ink:#f2f1ff;--mut:#9a97b8;--bub:#1c1a33;--line:#2a2748;--a:#00d4ff;--b:#ff2bd6;--ub:linear-gradient(135deg,#0a84c6,#7a3cff)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+#app{height:100%;display:flex;flex-direction:column;max-width:820px;margin:0 auto}
+header{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:8px;flex:1;font:800 15px Orbitron,sans-serif;letter-spacing:.12em}
+.brand svg{width:30px;height:30px}
+.ib,select{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;height:38px;min-width:38px;font:inherit;font-size:15px;padding:0 8px}
+#modes{display:flex;gap:8px;padding:10px 12px;overflow-x:auto}
+#modes button{flex:none;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:6px 14px;font:inherit;font-size:14px}
+#modes button.on{border-color:var(--a);box-shadow:0 0 0 2px color-mix(in srgb,var(--a) 30%,transparent);font-weight:600}
+#modes button.lock{opacity:.55}
+#msgs{flex:1;overflow-y:auto;padding:8px 12px 16px;display:flex;flex-direction:column;gap:10px}
+.m{max-width:88%;padding:10px 14px;border-radius:18px;word-wrap:break-word;overflow-wrap:anywhere}
+.m.u{align-self:flex-end;background:var(--ub);color:#fff;border-bottom-right-radius:6px}
+.m.a{align-self:flex-start;background:var(--bub);border:1px solid var(--line);border-bottom-left-radius:6px}
+.m.err{border-color:#e5484d;color:#e5484d}
+.m code{background:color-mix(in srgb,var(--mut) 20%,transparent);padding:1px 5px;border-radius:5px;font-size:.9em}
+.m pre{background:#0d0c1b;color:#e8e6ff;padding:10px;border-radius:10px;overflow-x:auto;white-space:pre-wrap;margin:6px 0}.m pre code{background:none;padding:0}
+.dots i{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:var(--mut);animation:d 1s infinite}.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes d{50%{transform:translateY(-5px);opacity:.4}}
+#hello{margin:auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px}
+#hello svg{width:84px;height:84px;filter:drop-shadow(0 0 12px color-mix(in srgb,var(--a) 60%,transparent))}
+#hello p{margin:0 0 6px;font-size:18px}
+#hello button{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:10px 16px;font:inherit;font-size:15px;max-width:100%}
+#bar{display:flex;gap:8px;align-items:flex-end;padding:10px 12px;border-top:1px solid var(--line)}
+#in{flex:1;resize:none;max-height:120px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:10px 14px;font:inherit;outline:none}
+#in:focus{border-color:var(--a)}
+#go{width:44px;height:44px;border:0;border-radius:50%;background:linear-gradient(135deg,var(--a),var(--b));color:#fff;font-size:20px}
+#go:disabled{opacity:.5}
+#dr{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;z-index:5}
+#dr div{width:min(320px,85%);height:100%;background:var(--bg);padding:calc(env(safe-area-inset-top,0px) + 12px) 12px 12px;overflow-y:auto}
+#dr h3{margin:0 0 10px;font-size:16px}
+.it{display:flex;gap:6px;margin-bottom:6px}.it button:first-child{flex:1;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font:inherit;font-size:14px}
+.it button+button{background:none;border:0;color:var(--mut);font-size:16px}
+#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 90px);transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:20px;font-size:14px;display:none;z-index:9;max-width:90%;text-align:center}
+#vo{position:fixed;inset:0;z-index:8;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:20px;text-align:center}
+#orb{width:150px;height:150px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--a),var(--b));box-shadow:0 0 50px color-mix(in srgb,var(--a) 60%,transparent);animation:pl 1.6s ease-in-out infinite}
+#vo[data-s=thk] #orb{animation:pl 3s linear infinite;opacity:.6}#vo[data-s=spk] #orb{animation:pl .7s ease-in-out infinite}
+@keyframes pl{50%{transform:scale(1.15)}}
+#vs{font:700 16px Orbitron,sans-serif;letter-spacing:.08em}#vt{min-height:60px;max-width:90%;color:var(--mut);font-size:18px}
+#vx{width:56px;height:56px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:22px}
+.m img{max-width:100%;max-height:160px;border-radius:10px;display:block;margin-bottom:6px}
+#pend{display:flex;flex-wrap:wrap;gap:8px;padding:0 12px}#pend:not(:empty){padding-top:8px}
+.ch{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px 8px;font-size:13px}.ch img{height:44px;border-radius:8px}.ch button{background:none;border:0;color:var(--mut);font-size:15px}
+#am{display:none;gap:8px;padding:8px 12px 0}#am button{flex:1;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:10px 4px;font:inherit;font-size:14px}
+#st{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;z-index:7;align-items:center;justify-content:center}
+#st>div{background:var(--bg);width:min(380px,92%);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px;border:1px solid var(--line)}
+#st h3{margin:0}#st label{font-size:13px;color:var(--mut)}#st input,#st select{width:100%;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:10px;height:40px;padding:0 10px;font:inherit}#st small{color:var(--mut)}
+</style></head><body><div id="app">
+<header><div class="brand"><svg viewBox="0 0 120 120"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00d4ff"/><stop offset="1" stop-color="#ff2bd6"/></linearGradient></defs><polygon points="60,6 108,33 108,87 60,114 12,87 12,33" fill="none" stroke="url(#g)" stroke-width="6"/><path d="M38 80V40l44 40V40" fill="none" stroke="url(#g)" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/></svg>NEW ERA AI</div>
+<button class="ib" id="hb">☰</button><button class="ib" id="nb">＋</button><button class="ib" id="sb">⚙</button>
+<select id="lg"><option value="kk">Қазақша</option><option value="ru">Русский</option><option value="en">English</option><option value="uz">O‘zbekcha</option></select></header>
+<div id="modes"></div><div id="msgs"></div>
+<div id="pend"></div><div id="am"><button id="a1"></button><button id="a2"></button><button id="a3"></button></div>
+<input type="file" id="fc" accept="image/*" capture="environment" hidden><input type="file" id="fg" accept="image/*" multiple hidden><input type="file" id="ff" accept=".pdf,.txt,.md,.csv,.json,.js,.py,.html,.css,.xml,text/*" multiple hidden>
+<div id="bar"><button class="ib" id="att">📎</button><button class="ib" id="mic">🎤</button><textarea id="in" rows="1"></textarea><button id="go">➤</button></div></div>
+<div id="dr"><div><h3 id="dh"></h3><div id="dl"></div></div></div><div id="st"><div><h3 data-i="sett"></h3><label data-i="prov"></label><select id="pv"><option value="auto">Auto</option><option value="gemini">Gemini</option><option value="or">OpenRouter</option></select><label data-i="key"></label><input id="ky" type="password" autocomplete="off"><label data-i="model"></label><input id="md"><small data-i="hk"></small><button class="ib" id="ok" data-i="save"></button></div></div>
+<div id="vo" data-s="lis"><div id="vs"></div><div id="orb"></div><div id="vt"></div><button id="vx">✕</button></div><div id="toast"></div>
+<script>
+const CFG={API_URL:''}; // сервер дайын болғанда: https://....workers.dev
+const $=i=>document.getElementById(i);
+const L={
+kk:{ph:'Хабарлама жазыңыз…',hist:'Тарих',empty:'Тарих бос',hi:'Сәлем! Мен New Era AI көмекшісімін. Не туралы сөйлесеміз?',s:['Ағылшын тілін үйретші','Жоспар құруға көмектес','Бұл тақырыпты оңай түсіндір'],m:['Жалпы','Сабақ','Іздеу','Сурет','Музыка'],soon:'Жақында қосылады',sn:'Толық іздеу сервер қосылғанда жұмыс істейді.',err:'Қате шықты. Қайта көріңіз.',nobk:'Сервер әлі қосылмаған.'},
+ru:{ph:'Напишите сообщение…',hist:'История',empty:'История пуста',hi:'Привет! Я помощник New Era AI. О чём поговорим?',s:['Помоги выучить английский','Помоги составить план','Объясни эту тему простыми словами'],m:['Общий','Учёба','Поиск','Фото','Музыка'],soon:'Скоро появится',sn:'Полноценный поиск заработает после подключения сервера.',err:'Произошла ошибка. Попробуйте ещё раз.',nobk:'Сервер ещё не подключён.'},
+en:{ph:'Type a message…',hist:'History',empty:'No chats yet',hi:'Hi! I’m the New Era AI assistant. What shall we talk about?',s:['Help me learn English','Help me make a plan','Explain this topic simply'],m:['General','Study','Search','Photo','Music'],soon:'Coming soon',sn:'Full web search will work once the server is connected.',err:'Something went wrong. Please try again.',nobk:'The server is not connected yet.'},
+uz:{ph:'Xabar yozing…',hist:'Tarix',empty:'Tarix bo‘sh',hi:'Salom! Men New Era AI yordamchisiman. Nima haqida gaplashamiz?',s:['Ingliz tilini o‘rganishga yordam bering','Reja tuzishga yordam bering','Bu mavzuni sodda tushuntiring'],m:['Umumiy','O‘qish','Qidiruv','Rasm','Musiqa'],soon:'Tez orada qo‘shiladi',sn:'To‘liq qidiruv server ulanganda ishlaydi.',err:'Xatolik yuz berdi. Qayta urinib ko‘ring.',nobk:'Server hali ulanmagan.'}};
+Object.assign(L.kk,{lis:'Тыңдап тұрмын…',thk:'Ойланып жатырмын…',spk:'Айтып жатырмын…',nov:'Бұл браузер дауыс режимін қолдамайды. Chrome қолданыңыз.',den:'Микрофонға рұқсат берілмеді.'});
+Object.assign(L.ru,{lis:'Слушаю…',thk:'Думаю…',spk:'Говорю…',nov:'Этот браузер не поддерживает голосовой режим. Используйте Chrome.',den:'Нет доступа к микрофону.'});
+Object.assign(L.en,{lis:'Listening…',thk:'Thinking…',spk:'Speaking…',nov:'This browser doesn’t support voice mode. Please use Chrome.',den:'Microphone access was denied.'});
+Object.assign(L.uz,{lis:'Tinglayapman…',thk:'O‘ylayapman…',spk:'Gapiryapman…',nov:'Bu brauzer ovozli rejimni qo‘llamaydi. Chrome’dan foydalaning.',den:'Mikrofonga ruxsat berilmadi.'});
+Object.assign(L.kk,{sett:'Баптаулар',prov:'AI жүйесі',key:'API кілті',model:'Модель (міндетті емес)',save:'Сақтау',hk:'Кілт тек осы құрылғыда сақталады.',cam:'Камера',gal:'Галерея',fil:'Файл',deft:'Мынаны талдап, не екенін түсіндір.',imgp:'Сурет жіберу үшін Баптауларда Gemini немесе OpenRouter таңдаңыз.',nokey:'Алдымен Баптауларда API кілтін енгізіңіз.',big:'Файл тым үлкен (10 МБ-тан аспасын).',unsup:'Бұл файл түрі қолдау таппайды.'});
+Object.assign(L.ru,{sett:'Настройки',prov:'ИИ-сервис',key:'API-ключ',model:'Модель (необязательно)',save:'Сохранить',hk:'Ключ хранится только на этом устройстве.',cam:'Камера',gal:'Галерея',fil:'Файл',deft:'Проанализируй это и объясни, что здесь.',imgp:'Для отправки фото выберите Gemini или OpenRouter в настройках.',nokey:'Сначала введите API-ключ в настройках.',big:'Файл слишком большой (до 10 МБ).',unsup:'Этот тип файла не поддерживается.'});
+Object.assign(L.en,{sett:'Settings',prov:'AI service',key:'API key',model:'Model (optional)',save:'Save',hk:'The key is stored only on this device.',cam:'Camera',gal:'Gallery',fil:'File',deft:'Analyze this and explain what it is.',imgp:'To send images, choose Gemini or OpenRouter in Settings.',nokey:'Enter your API key in Settings first.',big:'File is too large (max 10 MB).',unsup:'This file type is not supported.'});
+Object.assign(L.uz,{sett:'Sozlamalar',prov:'AI xizmati',key:'API kaliti',model:'Model (ixtiyoriy)',save:'Saqlash',hk:'Kalit faqat shu qurilmada saqlanadi.',cam:'Kamera',gal:'Galereya',fil:'Fayl',deft:'Buni tahlil qiling va nima ekanini tushuntiring.',imgp:'Rasm yuborish uchun Sozlamalarda Gemini yoki OpenRouter’ni tanlang.',nokey:'Avval Sozlamalarda API kalitini kiriting.',big:'Fayl juda katta (10 MB gacha).',unsup:'Bu fayl turi qo‘llab-quvvatlanmaydi.'});
+const MODES=['gen','study','search','photo','music'],LN={kk:'Kazakh',ru:'Russian',en:'English',uz:'Uzbek (Latin script)'};
+const ld=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}},sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const S=Object.assign({lang:'kk',mode:'gen'},ld('ne_c_s',{}));let chats=ld('ne_c_chats',[]),cur=null,busy=false,sample=null,ctl=null;
+const t=()=>L[S.lang];
+const SYS=m=>'You are New Era AI, a professional, friendly assistant. Reply in the language the user writes in; if unclear, use '+LN[S.lang]+'. Be accurate, clear and concise; use short paragraphs and lists when useful.'+(m=='study'?' Act as a patient tutor: explain step by step, check understanding with a short question, and adapt to the learner’s level.':'')+(m=='search'?' Prefer verified, up-to-date facts and say clearly when you are unsure.':'')+(vact?' The reply will be spoken aloud: keep it short and conversational, with no markdown, lists or emojis.':'');
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function md(x){let h=esc(x);h=h.replace(/```([\s\S]*?)```/g,(_,c)=>'<pre><code>'+c.replace(/^\w*\n/,'')+'</code></pre>');
+return h.replace(/`([^`\n]+)`/g,'<code>$1</code>').replace(/\*\*([^*\n]+)\*\*/g,'<b>$1</b>').replace(/^#{1,3} (.+)$/gm,'<b>$1</b>').replace(/^[-*] (.+)$/gm,'• $1').replace(/\n/g,'<br>')}
+let tt;function toast(x){const e=$('toast');e.textContent=x;e.style.display='block';clearTimeout(tt);tt=setTimeout(()=>e.style.display='none',2600)}
+function bub(c,html){const e=document.createElement('div');e.className='m '+c;e.innerHTML=html;$('msgs').appendChild(e);scr();return e}
+const scr=()=>{const m=$('msgs');m.scrollTop=m.scrollHeight};
+function render(){const m=$('msgs');m.innerHTML='';
+if(!cur||!cur.msgs.length){m.innerHTML='<div id="hello"><svg viewBox="0 0 120 120"><polygon points="60,6 108,33 108,87 60,114 12,87 12,33" fill="none" stroke="url(#g)" stroke-width="6"/><path d="M38 80V40l44 40V40" fill="none" stroke="url(#g)" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/></svg><p></p></div>';
+m.querySelector('p').textContent=t().hi;t().s.forEach(x=>{const b=document.createElement('button');b.textContent=x;b.onclick=()=>send(x);$('hello').appendChild(b)});return}
+cur.msgs.forEach(x=>bub(x.role=='user'?'u':'a',x.role=='user'?attH(x)+esc(x.content).replace(/\n/g,'<br>'):md(x.content)))}
+function lang(){document.documentElement.lang=S.lang;$('lg').value=S.lang;$('in').placeholder=t().ph;$('dh').textContent=t().hist;stT();$('a1').textContent='📷 '+t().cam;$('a2').textContent='🖼 '+t().gal;$('a3').textContent='📄 '+t().fil;
+const mo=$('modes');mo.innerHTML='';MODES.forEach((k,i)=>{const b=document.createElement('button');b.textContent=t().m[i];b.className=(S.mode==k?'on':'')+(i>2?' lock':'');
+b.onclick=()=>{if(i>2){toast(t().soon);return}S.mode=k;sv('ne_c_s',S);if(k=='search'&&!CFG.API_URL)toast(t().sn);lang()};mo.appendChild(b)});
+if(!cur||!cur.msgs.length)render()}
+async function ask(msgs,mode,on){const sys=SYS(mode);if(S.prov=='gemini'){const o=await gem(msgs,sys);on(o);return o}if(S.prov=='or'){const o=await orr(msgs,sys);on(o);return o}
+if(CFG.API_URL){const r=await fetch(CFG.API_URL,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({messages:msgs,mode,lang:S.lang,system:sys}),signal:ctl.signal});if(!r.ok)throw new Error('http '+r.status);const j=await r.json();on(j.text);return j.text}
+if(sample){if(msgs.some(m=>(m.att||[]).some(a=>a.url)))throw new Error(t().imgp);const a=msgs.map((x,i)=>({role:x.role,content:i==0?sys+'\n\n---\n'+toParts(x).tx:toParts(x).tx}));const r=await sample(a,{onText:({text})=>on(text),signal:ctl.signal,cache:false});return r.text}
+throw new Error(t().nobk)}
+async function send(x){x=(x||'').trim();const at=pend.slice();if((!x&&!at.length)||busy)return;if(!x)x=t().deft;if(!cur){cur={id:Date.now(),title:x.slice(0,40),msgs:[]};chats.unshift(cur)}
+cur.msgs.push({role:'user',content:x,att:at});pend=[];pendR();render();$('in').value='';fit();busy=true;$('go').disabled=true;ctl=new AbortController();
+const el=bub('a','<span class="dots"><i></i><i></i><i></i></span>');
+try{const out=await ask(cur.msgs,S.mode,y=>{el.innerHTML=md(y);scr()});el.innerHTML=md(out);cur.msgs.push({role:'assistant',content:out});saveC();return out}
+catch(e){if(ctl.signal.aborted)return;cur.msgs.pop();$('in').value=x;pend=at;pendR();el.classList.add('err');el.textContent=t().err+(e&&e.message?' ('+e.message+')':'')}
+finally{busy=false;$('go').disabled=false}}
+function fit(){const e=$('in');e.style.height='auto';e.style.height=Math.min(e.scrollHeight,120)+'px'}
+const SRc=window.SpeechRecognition||window.webkitSpeechRecognition,VL={kk:'kk-KZ',ru:'ru-RU',en:'en-US',uz:'uz-UZ'},FB={kk:['ru'],uz:['tr','en'],ru:[],en:[]};
+let vact=false,rec=null,empty=0;
+function setV(st,x){$('vo').dataset.s=st;$('vs').textContent=t()[st];if(x!=null)$('vt').textContent=x}
+function vopen(){if(!SRc||!window.speechSynthesis){toast(t().nov);return}vact=true;empty=0;$('vo').style.display='flex';listen()}
+function vclose(){vact=false;try{rec&&rec.abort()}catch(e){}speechSynthesis.cancel();if(ctl&&busy)ctl.abort();$('vo').style.display='none'}
+function listen(){if(!vact)return;setV('lis','');rec=new SRc();rec.lang=VL[S.lang];rec.interimResults=true;rec.continuous=false;let fin='';
+rec.onresult=e=>{let x='';for(const q of e.results){x+=q[0].transcript;if(q.isFinal)fin=x}$('vt').textContent=x};
+rec.onerror=e=>{if(e.error=='not-allowed'||e.error=='service-not-allowed'){toast(t().den);vclose()}};
+rec.onend=async()=>{if(!vact)return;const x=(fin||$('vt').textContent).trim();if(!x){if(++empty>=3){vclose();return}listen();return}empty=0;setV('thk',x);
+const out=await send(x);if(!vact)return;if(out){setV('spk');await say(out)}else toast(t().err);if(vact)listen()};
+try{rec.start()}catch(e){}}
+function say(x){return new Promise(res=>{const c=x.replace(/```[\s\S]*?```/g,' ').replace(/[*_#`>]/g,'').replace(/\n+/g,'. ');const ps=c.match(/[^.!?]+[.!?]*/g)||[c],q=[];let b='';
+ps.forEach(p=>{if((b+p).length>180){if(b)q.push(b);b=p}else b+=p});if(b)q.push(b);
+const vs=speechSynthesis.getVoices(),pk=l=>vs.find(v=>v.lang.toLowerCase().replace('_','-').startsWith(l));let lc=VL[S.lang],v=pk(lc.slice(0,2));
+if(!v)for(const f of FB[S.lang]){v=pk(f);if(v)break}
+let i=0;const nx=()=>{if(!vact||i>=q.length){res();return}const u=new SpeechSynthesisUtterance(q[i++].trim());u.lang=v?v.lang:lc;if(v)u.voice=v;u.onend=nx;u.onerror=nx;speechSynthesis.speak(u)};speechSynthesis.cancel();nx()})}
+$('mic').onclick=vopen;$('vx').onclick=vclose;
+let pend=[];
+const saveC=()=>sv('ne_c_chats',chats.slice(0,40).map(c=>({id:c.id,title:c.title,msgs:c.msgs.map(m=>({role:m.role,content:m.content,an:m.an||(m.att||[]).map(a=>a.name)}))})));
+function attH(m){return(m.att||[]).map(a=>a.url&&a.mime=='image/jpeg'?'<img src="'+a.url+'">':'📄 '+esc(a.name)+'<br>').join('')+(m.an||[]).map(n=>'📎 '+esc(n)+'<br>').join('')}
+const rdURL=f=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>ok(r.result);r.onerror=no;r.readAsDataURL(f)});
+async function addFile(f){if(pend.length>=4)return;if(f.size>10e6){toast(t().big);return}
+try{if(f.type.startsWith('image/')){const u=await rdURL(f),im=new Image();await new Promise((ok,no)=>{im.onload=ok;im.onerror=no;im.src=u});const k=Math.min(1,1280/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);pend.push({name:f.name||'photo.jpg',mime:'image/jpeg',url:c.toDataURL('image/jpeg',.82)})}
+else if(f.type=='application/pdf')pend.push({name:f.name,mime:'application/pdf',url:await rdURL(f)});
+else if(f.type.startsWith('text/')||/\.(txt|md|csv|json|js|py|html|css|xml)$/i.test(f.name))pend.push({name:f.name,text:(await f.text()).slice(0,60000)});
+else{toast(t().unsup);return}}catch(e){toast(t().unsup)}pendR()}
+function pendR(){const p=$('pend');p.innerHTML='';pend.forEach((a,i)=>{const d=document.createElement('div');d.className='ch';if(a.mime=='image/jpeg'){const im=document.createElement('img');im.src=a.url;d.appendChild(im)}else d.append('📄 '+a.name.slice(0,18));const b=document.createElement('button');b.textContent='✕';b.onclick=()=>{pend.splice(i,1);pendR()};d.appendChild(b);p.appendChild(d)})}
+$('att').onclick=()=>{const m=$('am');m.style.display=m.style.display=='flex'?'none':'flex'};
+$('a1').onclick=()=>$('fc').click();$('a2').onclick=()=>$('fg').click();$('a3').onclick=()=>$('ff').click();
+['fc','fg','ff'].forEach(i=>$(i).onchange=e=>{[...e.target.files].forEach(addFile);e.target.value='';$('am').style.display='none'});
+const toParts=m=>{let tx=m.content;const im=[];(m.att||[]).forEach(a=>{if(a.text)tx+='\n\n['+a.name+']\n'+a.text;else if(a.url)im.push(a)});return{tx,im}};
+const em=(j,r)=>((j.error&&j.error.message)||'http '+r.status).slice(0,140);
+async function gem(msgs,sys){if(!S.key){toast(t().nokey);throw new Error(t().nokey)}
+const body={systemInstruction:{parts:[{text:sys}]},contents:msgs.map(m=>{const{tx,im}=toParts(m);return{role:m.role=='user'?'user':'model',parts:[{text:tx},...im.map(a=>({inlineData:{mimeType:a.mime,data:a.url.split(',')[1]}}))]}})};
+const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+(S.model||'gemini-flash-latest')+':generateContent',{method:'POST',headers:{'content-type':'application/json','x-goog-api-key':S.key},body:JSON.stringify(body),signal:ctl.signal});
+const j=await r.json();if(!r.ok)throw new Error(em(j,r));const x=((((j.candidates||[])[0]||{}).content||{}).parts||[]).map(q=>q.text||'').join('');if(!x)throw new Error('empty');return x}
+async function orr(msgs,sys){if(!S.key){toast(t().nokey);throw new Error(t().nokey)}
+const body={model:S.model||'openrouter/free',messages:[{role:'system',content:sys},...msgs.map(m=>{const{tx,im}=toParts(m);const ii=im.filter(a=>a.mime=='image/jpeg');return{role:m.role,content:ii.length?[{type:'text',text:tx},...ii.map(a=>({type:'image_url',image_url:{url:a.url}}))]:tx}})]};
+const r=await fetch('https://openrouter.ai/api/v1/chat/completions',{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+S.key},body:JSON.stringify(body),signal:ctl.signal});
+const j=await r.json();if(!r.ok)throw new Error(em(j,r));const x=j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content;if(!x)throw new Error('empty');return x}
+function stT(){$('st').querySelectorAll('[data-i]').forEach(e=>e.textContent=t()[e.dataset.i])}
+const pvh=()=>{$('md').placeholder=$('pv').value=='or'?'openrouter/free':'gemini-flash-latest'};$('pv').onchange=pvh;
+$('sb').onclick=()=>{$('pv').value=S.prov||'auto';$('ky').value=S.key||'';$('md').value=S.model||'';pvh();$('st').style.display='flex'};
+$('ok').onclick=()=>{S.prov=$('pv').value;S.key=$('ky').value.trim();S.model=$('md').value.trim();sv('ne_c_s',S);$('st').style.display='none'};
+$('st').onclick=e=>{if(e.target.id=='st')$('st').style.display='none'};
+$('in').oninput=fit;$('go').onclick=()=>send($('in').value);
+$('in').onkeydown=e=>{if(e.key=='Enter'&&!e.shiftKey&&matchMedia('(pointer:fine)').matches){e.preventDefault();send($('in').value)}};
+$('nb').onclick=()=>{if(ctl)ctl.abort();busy=false;$('go').disabled=false;cur=null;render();lang()};
+$('lg').onchange=e=>{S.lang=e.target.value;sv('ne_c_s',S);lang()};
+function hist(){const d=$('dl');d.innerHTML='';if(!chats.length){d.textContent=t().empty;return}
+chats.forEach((c,i)=>{const r=document.createElement('div');r.className='it';const a=document.createElement('button'),b=document.createElement('button');a.textContent=c.title;b.textContent='✕';
+a.onclick=()=>{cur=c;$('dr').style.display='none';render()};b.onclick=()=>{chats.splice(i,1);saveC();if(cur===c)cur=null;hist();render();lang()};r.append(a,b);d.appendChild(r)})}
+$('hb').onclick=()=>{hist();$('dr').style.display='block'};$('dr').onclick=e=>{if(e.target.id=='dr')$('dr').style.display='none'};
+lang();
+try{if(window.claude&&claude.use)claude.use('sample').then(s=>{sample=s}).catch(()=>{})}catch(e){}
+if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>
